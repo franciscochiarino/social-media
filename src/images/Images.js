@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import ImageSkeleton from '../skeletons/ImageSkeleton';
 
 // Style
 const useStyles = makeStyles(() => ({
@@ -21,6 +22,7 @@ const useStyles = makeStyles(() => ({
 
 export default function Images() {
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
   const classes = useStyles();
 
   useEffect(() => {
@@ -33,7 +35,10 @@ export default function Images() {
         })
         return reducedData;
       })
-      .then(reducedData => setImages(reducedData))
+      .then(reducedData => {
+        setImages(reducedData);
+        setLoading(false);
+      });
   }, []);
 
   const renderImages = images.map(({ thumbnailUrl, title }) => {
@@ -47,6 +52,7 @@ export default function Images() {
   return (
     <>
     <Grid className={classes.root} container spacing={4} >
+      {loading ? new Array(9).fill(<ImageSkeleton />) : null }
       {renderImages}
     </Grid>
     </>
