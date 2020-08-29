@@ -17,12 +17,17 @@ const useStyles = makeStyles(() => ({
   },
   image: {
     padding: '0.5rem',
+    width: '166px',
+    height: '166px',
+    // Hide alt text:
+    background: 'white',
+    color: 'white',
   }
 }));
 
 export default function Images() {
   const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [imageIsLoaded, setImageIsLoaded] = useState(false)
   const classes = useStyles();
 
   useEffect(() => {
@@ -37,14 +42,18 @@ export default function Images() {
       })
       .then(reducedData => {
         setImages(reducedData);
-        setLoading(false);
       });
   }, []);
 
   const renderImages = images.map(({ thumbnailUrl, title }) => {
+    const imageStyle = !imageIsLoaded ? { display: 'none' } : {};
+
     return(
       <Grid className={classes.item} container item xs={4} spacing={1}>
-        <Paper className={classes.paper} elevation="3" ><img className={classes.image} src={thumbnailUrl} alt={title} /></Paper>
+        <Paper className={classes.paper} elevation="3">
+          { !imageIsLoaded ? <ImageSkeleton /> : null }
+          <img className={classes.image} src={thumbnailUrl} alt={title} style={imageStyle} onLoad={() => setImageIsLoaded(true)} />
+        </Paper>
       </Grid>
     )
   })
@@ -52,7 +61,6 @@ export default function Images() {
   return (
     <>
     <Grid className={classes.root} container spacing={4} >
-      {loading ? new Array(9).fill(<ImageSkeleton />) : null }
       {renderImages}
     </Grid>
     </>

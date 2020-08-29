@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PeopleCardContainer from './PeopleCardContainer';
-import PostCardSkeleton from '../skeletons/PostCardSkeleton';
 import PeopleCardSkeleton from '../skeletons/PeopleCardSkeleton';
 
 export default function People() {
