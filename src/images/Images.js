@@ -7,7 +7,8 @@ import ImageSkeleton from '../skeletons/ImageSkeleton';
 const useStyles = makeStyles(() => ({
   root: {
     maxWidth: '600px',
-    margin: '2rem auto'
+    margin: '2rem auto',
+    paddingBottom: '4rem',
   },
   item: {
     display: 'flex',
