@@ -38,7 +38,7 @@ export default function PostCardContainer({ id, title, body }) {
         </CardContent>
 
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
+          <IconButton aria-label="like">
             <FavoriteIcon />
           </IconButton>
           <IconButton aria-label="share">

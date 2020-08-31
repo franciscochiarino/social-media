@@ -9,7 +9,8 @@ const useStyles = makeStyles({
   root: {
     display: 'flex',
     justifyContent: 'space-around',
-    width: '70%',
+    minWidth: '520px',
+    maxWidth: '740px',
     margin: '3rem auto',
   },
   welcomeMessage: {
