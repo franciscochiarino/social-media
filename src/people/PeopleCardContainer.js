@@ -10,7 +10,8 @@ const useStyles = makeStyles(() => ({
     borderRadius: '15px',
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    boxShadow: '0px 1px 2px 0px rgba(209,209,209,0.75)',
   },
   btnContainer: {
     padding: '0 0.5rem'

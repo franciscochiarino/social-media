@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    boxShadow: '1px 1px 5px 0px rgba(145,145,145,0.8)',
+    boxShadow: '0px 1px 2px 0px rgba(209,209,209,0.75)',
     padding: '0 1rem' 
   },
   skeletonHeader: {

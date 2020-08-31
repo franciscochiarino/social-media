@@ -8,7 +8,7 @@ const useStyles = makeStyles(() => ({
     height: '242px',
     margin: "1.5rem auto",
     borderRadius: "15px",
-    boxShadow: "1px 1px 5px 0px rgba(145,145,145,0.8)"
+    boxShadow: "0px 1px 2px 0px rgba(209,209,209,0.75)"
   },
   skeletonHeader: {
     display: 'flex',

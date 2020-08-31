@@ -13,12 +13,17 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
   },
   paper: {
-    borderRadius: '10px',
+    width: '168px',
+    height: '168px',
+    borderRadius: '15px',
+    boxShadow: '0px 1px 2px 0px rgba(209,209,209,0.75)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
-    padding: '0.5rem',
-    width: '166px',
-    height: '166px',
+    width: '150px',
+    height: '150px',
     // Hide alt text:
     background: 'white',
     color: 'white',
