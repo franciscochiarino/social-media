@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+import { BottomNavigation, BottomNavigationAction, Button } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import { makeStyles } from '@material-ui/core/styles';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
@@ -17,14 +17,29 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: '#fff'
+  },
+  navIcons: {
+    width: '500px',
   },
   sideDivs: {
     width: '180px',
-    margin: '0 0.8rem'
+    margin: '0 0.8rem',
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   logo: {
     fontFamily: 'Poppins, sans-serif',
-    color: '#5babed',
+    color: '#1877f2',
+  },
+  btnContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  btn: {
+    fontFamily: 'Poppins, sans-serif',
+    borderRadius: '15px',
+    width: '80px',
   }
 })
 
@@ -53,24 +68,23 @@ function NavigationBar({ location }) {
   };
 
   return (
-    <section>
-      <BottomNavigation className={classes.root} value={value} onChange={handleChange} >
+    <section className={classes.root}>
 
-        <div className={classes.sideDivs} >
-          <h1 className={classes.logo} >social media</h1>
-        </div>
+      <div className={classes.sideDivs} >
+        <h1 className={classes.logo} >social media</h1>
+      </div>
 
-        <div>
-          <BottomNavigationAction href="#/" label="Home" value="home" icon={<HomeIcon />} />
-          <BottomNavigationAction href="#/people" label="People" value="people" icon={<PeopleAltIcon />} />
-          <BottomNavigationAction href="#/images" label="Images" value="images" icon={<ImageIcon />} />
-        </div>
-
-        <div className={classes.sideDivs} >
-          <button>hola</button>
-        </div>
-
+      <BottomNavigation className={classes.navIcons} value={value} onChange={handleChange} >
+        <BottomNavigationAction href="#/" label="Home" value="home" icon={<HomeIcon />} />
+        <BottomNavigationAction href="#/people" label="People" value="people" icon={<PeopleAltIcon />} />
+        <BottomNavigationAction href="#/images" label="Images" value="images" icon={<ImageIcon />} />
       </BottomNavigation>
+
+      <div className={classes.sideDivs} >
+        <Button size="small" className={classes.btn} variant="contained" color="secondary">Login</Button>
+        <Button size="small" className={classes.btn} variant="contained" color="primary">Sign Up</Button>
+      </div>
+
     </section>
   )
 }

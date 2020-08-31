@@ -17,6 +17,7 @@ const useStyles = makeStyles(() => ({
     padding: '0 0.5rem'
   },
   btn: {
+    fontFamily: 'Poppins, sans-serif',
     marginRight: '0.8rem',
     borderRadius: '8px',
     fontSize: '0.8rem',
