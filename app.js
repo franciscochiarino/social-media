@@ -5,7 +5,9 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 // Routes
+const indexRoute = require('./routes/indexRoute');
 const usersRoute = require('./routes/usersRoute');
+const postsRoutes = require('./routes/postsRoutes');
 // Other Imports
 const {setCORS} = require('./middlewares/security');
 dotenv.config();
@@ -32,7 +34,7 @@ app.use(cookieParser());
 app.use(setCORS);
 app.use('/', indexRoute);
 app.use('/users', usersRoute);
-app.use('/posts', postRoute);
+app.use('/posts', postsRoutes);
 
 // Error handler
 app.use((res, req, next) => {
