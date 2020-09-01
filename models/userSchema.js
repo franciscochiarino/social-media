@@ -9,6 +9,7 @@ const UserSchema = new Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   role: { type: String, enum: ['Admin', 'User'], default: 'User' },
   tokens: [{ token: { type: String, require: true }}]
 });
