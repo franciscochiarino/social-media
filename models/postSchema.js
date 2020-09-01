@@ -9,6 +9,7 @@ const PostSchema = new Schema({
   },
   date: { type: Date, default: Date.now },
   content: { type: String, required: true },
+  edited: { type: Boolean, default: false },
   likes: { type: Number }
 });
 

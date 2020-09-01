@@ -31,9 +31,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(setCORS);
 app.use('/', indexRoute);
-app.use('/books', booksRoute);
-app.use('/orders', ordersRoute);
 app.use('/users', usersRoute);
+app.use('/posts', postRoute);
 
 // Error handler
 app.use((res, req, next) => {
