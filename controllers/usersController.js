@@ -35,11 +35,10 @@ exports.postUser = async (req, res, next) => {
 };
 
 exports.deleteUser = async (req, res, next) => {
-  const { id } = req.params;
   try {
-    const user = await User.findByIdAndDelete(id);
+    const user = await User.findByIdAndDelete(req.params.id);
     if (!user) throw createError(404);
-    res.json({ success: true, user });
+    res.json({ success: true });
   } catch(err) {
     next(err);
   }
