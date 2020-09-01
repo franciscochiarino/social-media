@@ -35,5 +35,6 @@
     ]
   },
   "author": "Francisco Chiarino",
-  "license": "ISC"
+  "license": "ISC",
+  "proxy": "https://localhost:3001"
 }
