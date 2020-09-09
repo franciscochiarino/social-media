@@ -20,7 +20,6 @@ export default function People() {
       .then(users => {
         setUsers(users);
         setLoading(false);
-        console.log(users)
       });
   }, []);
 

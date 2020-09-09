@@ -5,7 +5,7 @@ const { create } = require('../models/postSchema');
 exports.getPosts = async (req, res, next) => {
   try {
     const posts = await Post.find();
-    res.json({ success: true, books });
+    res.json({ success: true, posts });
   }
   catch(err) {
     next(err);

@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import PostCardContainer from './PostCardContainer';
 import PostCardSkeleton from '../skeletons/PostCardSkeleton';
-import { getUsers } from '../../actions/userActions'; 
+import { getPosts } from '../../actions/postActions';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [users, setUsers] = useState(null);
 
   useEffect(() => {
-    // Get Posts
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(res => res.json())
-      .then(data => {
-        setPosts(data);
+    getPosts()
+      .then(posts => {
+        setPosts(posts);
         setLoading(false);
-      });
-    // getUsers().then(users => setUsers(users));
+      })
   }, []);
 
-  const renderPosts = posts.map(({ id, title, body }) => {
+  const renderPosts = posts.map(({ id, author, content }) => {
     return (
-      <PostCardContainer key={id} id={id} title={title} body={body} />
+      <PostCardContainer key={id} author={`${author.firstName} ${author.lastName}`} content={content} />
     )
   })
 
