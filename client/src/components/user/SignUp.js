@@ -46,7 +46,7 @@ export default function SignUp() {
         <StyledInput id="standard-basic" required label="Standard" placeholder="Last Name" />
         <StyledInput id="standard-basic" required label="Standard" type="email" placeholder="Email" />
         <StyledInput id="standard-basic" required label="Standard" type="password" placeholder="Password" />
-        <StyledButton className={classes.btn} type="submit" color="primary">Sign Up</StyledButton>
+        <StyledButton className={classes.btn} type="submit" color="primary">Sign Up!</StyledButton>
       </form>
     </section>
   )

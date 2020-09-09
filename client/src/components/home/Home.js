@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PostCardContainer from './PostCardContainer';
 import PostCardSkeleton from '../skeletons/PostCardSkeleton';
 import { getPosts } from '../../actions/postActions';
-import PostInput from './PostInput';
+import PostForm from './PostForm';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -16,17 +16,17 @@ export default function Home() {
       })
   }, []);
 
-  const renderPosts = posts.map(({ id, author, content }) => {
+  const renderPosts = posts.map(({ id, author, date, content }) => {
     return (
-      <PostCardContainer key={id} author={`${author.firstName} ${author.lastName}`} content={content} />
+      <PostCardContainer key={id} author={`${author.firstName} ${author.lastName}`} content={content} date={date} />
     )
   })
 
   return (
     <>
-      <PostInput />
+      <PostForm />
       {loading ? new Array(10).fill(<PostCardSkeleton />) : null }
-      {renderPosts}
+      {renderPosts.reverse()}
     </>
   )
 }
