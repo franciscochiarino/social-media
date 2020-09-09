@@ -3,7 +3,7 @@ const { getUsers, getUser, postUser, deleteUser, login } = require('../controlle
 const { validateUser } = require('../middlewares/validator');
 const { authToken } = require('../middlewares/authenticator');
 
-Router.get('/', authToken, getUsers);
+Router.get('/', getUsers);
 Router.get('/:id', getUser);
 Router.post('/', validateUser(), postUser);
 Router.post('/login', login)
