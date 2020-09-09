@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PostCardContainer from './PostCardContainer';
 import PostCardSkeleton from '../skeletons/PostCardSkeleton';
-import {getUsers} from '../../actions/userActions'; 
+import { getUsers } from '../../actions/userActions'; 
 
 export default function Home() {
   const [posts, setPosts] = useState([]);

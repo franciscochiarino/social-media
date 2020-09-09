@@ -12,7 +12,15 @@ const UserSchema = new Schema({
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   role: { type: String, enum: ['Admin', 'User'], default: 'User' },
   tokens: [{ token: { type: String, require: true }}]
+},
+{
+  toObject: { virtuals: true }
 });
+
+// Create fullName virtual
+UserSchema.virtual('fullName').get(() => {
+  return `${this.firstName} ${this.lastName}`;
+})
 
 // Enctypt password before saving
 UserSchema.pre('save', async function(next) {
@@ -30,6 +38,7 @@ UserSchema.methods.getPublicFields = function() {
     id: this._id,
     firstName: this.firstName,
     lastName: this.lastName,
+    fullName: this.fullName,
     role: this.role,
     email: this.email,
   };

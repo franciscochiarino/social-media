@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PeopleCardContainer from './PeopleCardContainer';
 import PeopleCardSkeleton from '../skeletons/PeopleCardSkeleton';
 import { makeStyles } from '@material-ui/core/styles';
+import { getUsers } from '../../actions/userActions';
 
 const useStyles = makeStyles({
   root: {
@@ -15,18 +16,17 @@ export default function People() {
   const classes = useStyles();
 
   useEffect(() => {
-    // Get Users
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then(res => res.json())
-    .then(data => {
-      setUsers(data);
-      setLoading(false);
-    });
+    getUsers()
+      .then(users => {
+        setUsers(users);
+        setLoading(false);
+        console.log(users)
+      });
   }, []);
 
-  const renderUsers = users.map(({ id, name }) => {
+  const renderUsers = users.map(({ id, firstName, lastName }) => {
     return (
-      <PeopleCardContainer id={id} name={name} />
+      <PeopleCardContainer id={id} firstName={firstName} lastName={lastName} />
     )
   });
 
