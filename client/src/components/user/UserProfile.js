@@ -32,16 +32,16 @@ export default function UserProfile() {
     <>
       <Avatar className={classes.avatar} />
 
-    <div className={classes.cards} >
-      <StyledCard className={classes.profileCard}>
-        <Typography variant="h1">Jack Nicholson</Typography>
-        <Typography variant="subtitle1" >Member of social media since July 15, 2008</Typography>
-      </StyledCard>
+      <div className={classes.cards} >
+        <StyledCard className={classes.profileCard}>
+          <Typography variant="h1">Jack Nicholson</Typography>
+          <Typography variant="subtitle1" >Member of social media since July 15, 2008</Typography>
+        </StyledCard>
 
-      <StyledCard className={classes.postTitle}>
-        <Typography variant="h2">Posts</Typography>
-      </StyledCard>
-    </div>
+        <StyledCard className={classes.postTitle}>
+          <Typography variant="h2">Posts</Typography>
+        </StyledCard>
+      </div>
     </>
   )
 }
