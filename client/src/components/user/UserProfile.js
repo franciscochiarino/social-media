@@ -39,7 +39,7 @@ export default function UserProfile() {
         </StyledCard>
 
         <StyledCard className={classes.postTitle}>
-          <Typography variant="h2">Posts</Typography>
+          <Typography variant="h5">Posts</Typography>
         </StyledCard>
       </div>
     </>
