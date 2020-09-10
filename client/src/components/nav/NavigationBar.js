@@ -63,7 +63,7 @@ function NavigationBar({ location }) {
     <section className={classes.root}>
 
       <div className={classes.sideDivs} >
-        <Typography variant="h1" color="primary">social media</Typography>
+        <Typography variant="h5" color="primary">social media</Typography>
       </div>
 
       <BottomNavigation className={classes.navIcons} value={value} onChange={handleChange} >

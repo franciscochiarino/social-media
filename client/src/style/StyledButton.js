@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 
 const StyledButton = withStyles({
   root: {
-    fontFamily: 'Poppins, sans-serif',
+    fontFamily: 'Roboto, sans-serif',
     borderRadius: '15px',
     minWidth: '80px',
   },

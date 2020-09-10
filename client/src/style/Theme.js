@@ -13,7 +13,7 @@ const Theme = createMuiTheme({
   typography: {
     h1: {
       fontFamily: 'Poppins, sans-serif',
-      fontSize: '1.5rem',
+      fontSize: '2.5rem',
     },
     h2: {
       fontFamily: 'Poppins, sans-serif',
