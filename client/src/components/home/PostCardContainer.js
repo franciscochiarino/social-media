@@ -16,7 +16,7 @@ export default function PostCardContainer({ author, date, content }) {
 
   return (
     <>
-      <StyledCard >
+      <StyledCard>
 
         <div style={cardHeaderStyle}>
           <CardHeader 
