@@ -61,8 +61,9 @@ exports.login = async (req, res, next) => {
     // Get public fields
     const publicFields = user.getPublicFields();
 
-    // Attach token to cookie
-    res.cookie('x-auth', token);
+    // Attach token to session
+    req.session.token = token;
+    req.session.user = publicFields;
     
     // Return user
     res.json({ success: true, user: publicFields });
