@@ -1,11 +1,13 @@
-
 import React from 'react';
-import NavigationBar from './nav/NavigationBar';
 import { HashRouter, Switch, Route } from 'react-router-dom'
+import '../main.scss';
+
+// Components
+import NavigationBar from './nav/NavigationBar';
 import People from './people/People';
 import Images from './images/Images';
 import Home from './home/Home';
-import '../main.scss';
+import UserProfile from './user/UserProfile';
 import Login from './user/Login';
 import SignUp from './user/SignUp';
 
@@ -21,6 +23,7 @@ function App() {
           <Route exact path="/images" component={Images} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signUp" component={SignUp} />
+          <Route exact path="/profile" component={UserProfile} />
         </Switch>
       </HashRouter>
     </>
