@@ -3,6 +3,7 @@ import PeopleCardContainer from './PeopleCardContainer';
 import PeopleCardSkeleton from '../skeletons/PeopleCardSkeleton';
 import { makeStyles } from '@material-ui/core/styles';
 import { getUsers } from '../../actions/userActions';
+import { useAlert } from 'react-alert';
 
 const useStyles = makeStyles({
   root: {
@@ -14,12 +15,17 @@ export default function People() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
+  const alert = useAlert();
 
   useEffect(() => {
     getUsers()
       .then(users => {
         setUsers(users);
         setLoading(false);
+      })
+      .catch(err => {
+        console.log(err);
+        alert.error('Something went wrong, please try again later.');
       });
   }, []);
 
