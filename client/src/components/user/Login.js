@@ -49,7 +49,7 @@ export default function Login() {
   };
 
   // Redirect if user is logged in
-  if (user) return <Redirect to={`/user/${user.id}`} />
+  if (user) return <Redirect to={`/profile/${user.id}`} />
 
   return (
     <section className={classes.root} >

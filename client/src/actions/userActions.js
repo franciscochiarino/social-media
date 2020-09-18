@@ -9,6 +9,17 @@ export const getUsers = async () => {
   }
 };
 
+export const getUser = async (id) => {
+  try {
+    const data = await fetch(`/users/${id}`);
+    const res = await data.json();
+    return res;
+  }
+  catch(err) {
+    return err;
+  }
+}
+
 export const postUser = async (user) => {
 
   const postUser = {
