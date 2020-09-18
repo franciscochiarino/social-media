@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import world from '../../assets/world.png';
 import StyledInput from '../../style/StyledInput';
 import StyledButton from '../../style/StyledButton';
 import { makeStyles } from '@material-ui/core/styles';
 import { useAlert } from 'react-alert';
 import { login } from '../../actions/userActions';
+import { UserContext } from '../../context/UserContext';
 
 const useStyles = makeStyles({
   root: {
@@ -31,12 +32,13 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [, setUser] = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     login(email, password)
-    .then(data => console.log(data))
+    .then(res => setUser(res.user))
     .catch(err => {
       console.log(err);
       alert.error('Something went wrong. Please try again later.');

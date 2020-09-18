@@ -1,5 +1,6 @@
 import React from 'react';
-import { HashRouter, Switch, Route } from 'react-router-dom'
+import { HashRouter, Switch, Route } from 'react-router-dom';
+import { UserProvider } from '../context/UserContext';
 import '../main.scss';
 
 // Components
@@ -15,16 +16,17 @@ function App() {
   return (
     <>
       <HashRouter>
-        <NavigationBar />
-
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/people" component={People} />
-          <Route exact path="/images" component={Images} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signUp" component={SignUp} />
-          <Route exact path="/profile" component={UserProfile} />
-        </Switch>
+        <UserProvider>
+          <NavigationBar />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/people" component={People} />
+            <Route exact path="/images" component={Images} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signUp" component={SignUp} />
+            <Route exact path="/profile/:id" component={UserProfile} />
+          </Switch>
+        </UserProvider>
       </HashRouter>
     </>
   );
