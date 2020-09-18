@@ -27,7 +27,7 @@ export default function People() {
         console.log(err);
         alert.error('Something went wrong, please try again later.');
       });
-  }, []);
+  }, [alert]);
 
   const renderUsers = users.map(({ id, firstName, lastName }) => {
     return (

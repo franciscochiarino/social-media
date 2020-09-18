@@ -36,9 +36,10 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const user = { firstName, lastName, email, password };
-    
+
     createUser(user)
       .then(console.log(user))
       .catch(err => console.log(err))
@@ -57,10 +58,10 @@ export default function SignUp() {
       </div>
 
       <form className={classes.form} onSubmit={handleSubmit}>
-        <StyledInput id="standard-basic" required label="Standard" placeholder="First Name" value={firstName} onChange={setFirstName} />
-        <StyledInput id="standard-basic" required label="Standard" placeholder="Last Name" value={lastName} onChange={setLastName} />
-        <StyledInput id="standard-basic" required label="Standard" type="email" placeholder="Email" value={email} onChange={setEmail} />
-        <StyledInput id="standard-basic" required label="Standard" type="password" placeholder="Password" value={password} onChange={setPassword} />
+        <StyledInput id="standard-basic" required label="Standard" placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} />
+        <StyledInput id="standard-basic" required label="Standard" placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} />
+        <StyledInput id="standard-basic" required label="Standard" type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+        <StyledInput id="standard-basic" required label="Standard" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
         <StyledButton className={classes.btn} type="submit" color="primary">Sign Up!</StyledButton>
       </form>
 
