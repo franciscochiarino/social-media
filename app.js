@@ -21,7 +21,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 // Listen
-app.listen(port, () => console.log('... Server is running ...'));
+app.listen(port, () => console.log(`... Server is running on port ${port} ...`));
 
 // Database
 mongoose.connect(config.db, {useNewUrlParser: true, useUnifiedTopology: true});

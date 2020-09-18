@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import world from '../../assets/world.png';
 import { Typography } from '@material-ui/core';
 import StyledInput from '../../style/StyledInput';
 import StyledButton from '../../style/StyledButton';
 import { makeStyles } from '@material-ui/core/styles';
+import { createUser } from '../../actions/userActions';
 
 const useStyles = makeStyles({
   root: {
@@ -30,9 +31,22 @@ const useStyles = makeStyles({
 
 export default function SignUp() {
   const classes = useStyles();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = () => {
+    const user = { firstName, lastName, email, password };
+    
+    createUser(user)
+      .then(console.log(user))
+      .catch(err => console.log(err))
+  }
 
   return (
     <section className={classes.root}>
+
       <div>
         <img src={world} alt="planet earth" width={200} />
         <div className={classes.welcomeMessage}>
@@ -41,13 +55,15 @@ export default function SignUp() {
           <Typography variat="subtitle1">Find the people you're looking for</Typography>
         </div>
       </div>
-      <form className={classes.form}>
-        <StyledInput id="standard-basic" required label="Standard" placeholder="First Name" />
-        <StyledInput id="standard-basic" required label="Standard" placeholder="Last Name" />
-        <StyledInput id="standard-basic" required label="Standard" type="email" placeholder="Email" />
-        <StyledInput id="standard-basic" required label="Standard" type="password" placeholder="Password" />
+
+      <form className={classes.form} onSubmit={handleSubmit}>
+        <StyledInput id="standard-basic" required label="Standard" placeholder="First Name" value={firstName} onChange={setFirstName} />
+        <StyledInput id="standard-basic" required label="Standard" placeholder="Last Name" value={lastName} onChange={setLastName} />
+        <StyledInput id="standard-basic" required label="Standard" type="email" placeholder="Email" value={email} onChange={setEmail} />
+        <StyledInput id="standard-basic" required label="Standard" type="password" placeholder="Password" value={password} onChange={setPassword} />
         <StyledButton className={classes.btn} type="submit" color="primary">Sign Up!</StyledButton>
       </form>
+
     </section>
   )
 }
