@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import world from '../../assets/world.png';
 import StyledInput from '../../style/StyledInput';
 import StyledButton from '../../style/StyledButton';
@@ -32,18 +33,23 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [, setUser] = useContext(UserContext);
+  const [user, setUser] = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     login(email, password)
-    .then(res => setUser(res.user))
+    .then(res => {
+      res.success ? setUser(res.user) : alert.error('Something went wrong...');
+    })
     .catch(err => {
       console.log(err);
       alert.error('Something went wrong. Please try again later.');
     });
   };
+
+  // Redirect if user is logged in
+  if (user) return <Redirect to={`/user/${user.id}`} />
 
   return (
     <section className={classes.root} >
