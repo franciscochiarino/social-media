@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import { BottomNavigation, BottomNavigationAction, Typography } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import ImageIcon from '@material-ui/icons/Image';
 import StyledButton from '../../style/StyledButton';
+import { UserContext } from '../../context/UserContext';
 
 const useStyles = makeStyles({
   root: {
@@ -29,6 +30,12 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
   },
+  profileBtnDiv: {
+    width: '180px',
+    margin: '0 0.8rem',
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
   btnContainer: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -37,6 +44,7 @@ const useStyles = makeStyles({
 
 function NavigationBar({ location }) {
   const [value, setValue] = useState('');
+  const [user, setUser] = useContext(UserContext);
   const classes = useStyles();
 
   useEffect(() => {
@@ -72,11 +80,16 @@ function NavigationBar({ location }) {
         <BottomNavigationAction href="#/images" label="Images" value="images" icon={<ImageIcon />} />
       </BottomNavigation>
 
-      <div className={classes.sideDivs} >
-        <StyledButton href="#/login" size="small" className={classes.btn} variant="contained" color="secondary">Login</StyledButton>
-        <StyledButton href="#/signUp" size="small" className={classes.btn} variant="contained" color="primary">Sign Up</StyledButton>
-      </div>
-
+      {user ?
+        <div className={classes.profileBtnDiv}>
+            <StyledButton href={`#/profile/${user.id}`} size="small" className={classes.btn} variant="contained" color="primary">{user.firstName}</StyledButton>
+        </div>
+      :
+        <div className={classes.sideDivs} >
+            <StyledButton href="#/login" size="small" className={classes.btn} variant="contained" color="secondary">Login</StyledButton>
+            <StyledButton href="#/signUp" size="small" className={classes.btn} variant="contained" color="primary">Sign Up</StyledButton>
+        </div>
+      }
     </section>
   )
 }
