@@ -30,7 +30,7 @@ export default function PeopleCardContainer({ id, firstName, lastName }) {
       <Card className={classes.root} >
         <CardHeader avatar={ <Avatar src={`https://joeschmoe.io/api/v1/${id}`} /> } title={`${firstName} ${lastName}`} />
         <div className={classes.btnContainer} >
-          <StyledButton size="small" className={classes.btn} variant="contained" color="secondary">View Profile</StyledButton>
+          <StyledButton href={`#/profile/${id}`} size="small" className={classes.btn} variant="contained" color="secondary">View Profile</StyledButton>
           <StyledButton size="small" className={classes.btn} variant="contained" color="primary">Follow</StyledButton>
         </div>
       </Card>

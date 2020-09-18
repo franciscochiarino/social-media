@@ -38,16 +38,14 @@ function UserProfile({ location }) {
   const id = location.pathname.split('/')[2];
 
   useEffect(() => {
-    if (!user) {
-      getUser(id)
-        .then(res => {
-          res.success ? setUser(res.user) : alert.error('Something went wrong.');
-        })
-        .catch(err => {
-          console.log(err);
-          alert.error('Something went wrong. Please try again later.');
-        })
-    }
+    getUser(id)
+      .then(res => {
+        res.success ? setUser(res.user) : alert.error('Something went wrong.');
+      })
+      .catch(err => {
+        console.log(err);
+        alert.error('Something went wrong. Please try again later.');
+      })
   }, [alert, setUser, user, id]);
 
   // Wait for getUser request
