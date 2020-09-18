@@ -48,7 +48,7 @@ exports.login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     // Find user
-    const user = await User.findOne({email}); // Populate?
+    const user = await User.findOne({email}); // TODO: Populate?
     if (!user) throw createError(404);
 
     // Compare password
