@@ -2,9 +2,6 @@ const {body, validationResult} = require('express-validator');
 
 exports.validateUser = () => {
     return [
-        body('firstName')
-            .exists()
-            .trim(),
         body('email')
             .isEmail()
             .withMessage('Please use a valid email address'),

@@ -4,7 +4,7 @@ import { Typography } from '@material-ui/core';
 import StyledInput from '../../style/StyledInput';
 import StyledButton from '../../style/StyledButton';
 import { makeStyles } from '@material-ui/core/styles';
-import { createUser } from '../../actions/userActions';
+import { postUser } from '../../actions/userActions';
 
 const useStyles = makeStyles({
   root: {
@@ -40,8 +40,8 @@ export default function SignUp() {
     e.preventDefault();
     const user = { firstName, lastName, email, password };
 
-    createUser(user)
-      .then(console.log(user))
+    postUser(user)
+      .then(data => console.log(data.success))
       .catch(err => console.log(err))
   }
 

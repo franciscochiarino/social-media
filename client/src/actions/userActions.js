@@ -9,13 +9,11 @@ export const getUsers = async () => {
   }
 };
 
-export const createUser = async (user) => {
+export const postUser = async (user) => {
 
   const postUser = {
     method: 'POST',
-    headers: { 
-        'content-type': 'application/json'
-    },
+    headers: { 'content-type': 'application/json' },
     body: JSON.stringify(user)
   };
 
@@ -28,3 +26,21 @@ export const createUser = async (user) => {
     return err;
   }
 };
+
+export const login = async (email, password) => {
+  
+  const postUser = {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ email, password })
+  }
+
+  try {
+    const data = await fetch('/users/login', postUser);
+    const user = await data.json();
+    return user;
+  }
+  catch(err) {
+    return err;
+  }
+}
