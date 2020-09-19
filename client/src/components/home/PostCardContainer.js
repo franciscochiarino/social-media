@@ -5,6 +5,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import StyledCard from '../../style/StyledCard';
+import { deletePost } from '../../actions/postActions';
 // import PostCardSkeleton from '../skeletons/PostCardSkeleton';
 
 const cardHeaderStyle = {
@@ -13,7 +14,13 @@ const cardHeaderStyle = {
   alignItems: 'center'
 }
 
-export default function PostCardContainer({ author, date, content, user }) {
+export default function PostCardContainer({ id, author, date, content, user }) {
+
+  const handleDeleteButton = () => {
+    deletePost(id)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
 
   return (
       <>
@@ -30,10 +37,10 @@ export default function PostCardContainer({ author, date, content, user }) {
 
             {user && user.id === author.id ? 
               <div>
-                <IconButton aria-label="edit">
+                <IconButton aria-label="edit" title="Edit">
                   <EditIcon />
                 </IconButton>
-                <IconButton aria-label="delete"  style={{ marginRight: '0.5rem' }}>
+                <IconButton aria-label="delete" title="Delete" style={{ marginRight: '0.5rem' }} onClick={handleDeleteButton}>
                   <DeleteIcon />
                 </IconButton>
               </div>
@@ -47,10 +54,10 @@ export default function PostCardContainer({ author, date, content, user }) {
           </CardContent>
 
           <CardActions disableSpacing>
-            <IconButton aria-label="like">
+            <IconButton aria-label="like" title="Like">
               <FavoriteIcon />
             </IconButton>
-            <IconButton aria-label="share">
+            <IconButton aria-label="share" title="Share">
               <ShareIcon />
             </IconButton>
           </CardActions>

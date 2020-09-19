@@ -22,7 +22,7 @@ export default function Home({ user }) {
 
   const renderPosts = posts.map(({ _id, author, date, content }) => {
     return (
-      <PostCardContainer key={_id} author={author} content={content} date={date} user={user} />
+      <PostCardContainer key={_id} id={_id} author={author} content={content} date={date} user={user} />
     )
   });
 

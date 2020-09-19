@@ -36,7 +36,7 @@ exports.putPost = async (req, res, next) => {
   }
 };
 
-exports.deletePost = async (req, res, next) => {
+exports.deletePost = async (req, res, next) => {  
   try {
     const post = await Post.findByIdAndDelete(req.params.id);
     if (!post) throw createError(404);
