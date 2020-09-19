@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import StyledCard from '../../style/StyledCard';
 import StyledButton from '../../style/StyledButton';
 import { CardHeader, Avatar, TextField } from '@material-ui/core';
 import { addPost } from '../../actions/postActions';
-import { UserContext } from '../../context/UserContext';
 import { useAlert } from 'react-alert';
 
 const divStyle = {
@@ -16,9 +15,8 @@ const postButtonStyle = {
   borderRadius: '0px 0px 15px 15px',
 }
 
-export default function PostForm() {
+export default function PostForm({ user }) {
   const [content, setContent] = useState('initialState');
-  const [user, ] = useContext(UserContext);
   const alert = useAlert();
 
   const handleForm = e => {
@@ -40,8 +38,8 @@ export default function PostForm() {
     <StyledCard>
       <form onSubmit={handleForm}>
         <div style={divStyle} >
-          <CardHeader avatar={ <Avatar src={`https://joeschmoe.io/api/v1/1234`} /> } />
-          <TextField id='outlined-basic' multiline style={{width: '80%'}} placeholder="What's on your mind, userName?" onChange={e => setContent(e.target.value)} />
+          <CardHeader avatar={ <Avatar src={`https://joeschmoe.io/api/v1/${user.id}`} /> } /> 
+          <TextField id='outlined-basic' multiline style={{width: '80%'}} placeholder={`What's on your mind, ${user.firstName}?`} onChange={e => setContent(e.target.value)} />
         </div>
         <div>
           <StyledButton fullWidth color='primary' type='submit' style={postButtonStyle}>POST</StyledButton>

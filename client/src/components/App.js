@@ -30,7 +30,7 @@ function App() {
       <HashRouter>
           <NavigationBar user={user} />
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" render={(props) => <Home {...props} user={user} /> } />
             <Route exact path="/people" component={People} />
             <Route exact path="/images" component={Images} />
             <Route exact path="/login" component={Login} />

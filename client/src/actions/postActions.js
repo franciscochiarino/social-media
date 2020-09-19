@@ -13,8 +13,11 @@ export const addPost = async (id, firstName, lastName, content) => {
   const options = {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(id, firstName, lastName, content)
-  }
+    body: JSON.stringify({
+      author: { id, firstName, lastName },
+      content
+    })
+  };
 
   try {
     const data = await fetch('/posts', options);
