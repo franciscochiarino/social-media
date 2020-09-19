@@ -17,6 +17,7 @@ const cardHeaderStyle = {
 
 export default function PostCardContainer({ id, author, date, content, user, updatePosts, setUpdatePosts }) {
 
+  // Delete Post
   const handleDeletePostButton = (postId) => {
     deletePost(postId)
       .then(() => setUpdatePosts(!updatePosts))
@@ -28,6 +29,8 @@ export default function PostCardContainer({ id, author, date, content, user, upd
         <StyledCard>
 
           <div style={cardHeaderStyle}>
+            
+            {/* Post header */}
             <CardHeader 
               avatar={ <Avatar src={`https://joeschmoe.io/api/v1/${author.id}`} /> } 
               title={`${author.firstName} ${author.lastName}`} 
@@ -36,6 +39,7 @@ export default function PostCardContainer({ id, author, date, content, user, upd
               subheader={new Date(date).toLocaleDateString()} 
             />
 
+            {/* Edit/Delete buttons */}
             {user && user.id === author.id ? 
               <div>
                 <IconButton aria-label="edit" title="Edit">
@@ -48,12 +52,14 @@ export default function PostCardContainer({ id, author, date, content, user, upd
             : null }
           </div>
 
+          {/* Post content */}
           <CardContent >
             <Typography variant="body1">
               {content}
             </Typography> 
           </CardContent>
 
+          {/* Like/Share buttons */}
           <CardActions disableSpacing>
             <IconButton aria-label="like" title="Like">
               <FavoriteIcon />

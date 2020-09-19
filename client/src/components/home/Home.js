@@ -13,7 +13,10 @@ export default function Home({ user, posts, updatePosts, setUpdatePosts }) {
   return (
     posts ? (
       <>
+        {/* Post form */}
         {user ? <PostForm user={user} updatePosts={updatePosts} setUpdatePosts={setUpdatePosts} /> : null}
+
+        {/* Posts */}
         {renderPosts.reverse()}
       </>
     ) : (null)

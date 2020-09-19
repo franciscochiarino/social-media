@@ -17,6 +17,7 @@ const postButtonStyle = {
 export default function PostForm({ user, updatePosts, setUpdatePosts }) {
   const [content, setContent] = useState('initialState');
 
+  // Create new post
   const handlePostForm = (e, content) => {
     e.preventDefault();
 
@@ -32,15 +33,18 @@ export default function PostForm({ user, updatePosts, setUpdatePosts }) {
   return (
     <StyledCard>
       <form onSubmit={e => handlePostForm(e, content)}>
+
+        {/* Avatar and input */}
         <div style={divStyle} >
           <CardHeader avatar={ <Avatar src={`https://joeschmoe.io/api/v1/${user.id}`} /> } /> 
           <TextField id='outlined-basic' multiline style={{width: '80%'}} placeholder={`What's on your mind, ${user.firstName}?`} onChange={e => setContent(e.target.value)} />
         </div>
+
+        {/* Submit */}
         <div>
           <StyledButton fullWidth color='primary' type='submit' style={postButtonStyle}>POST</StyledButton>
         </div>
       </form>
-
     </StyledCard>
   )
 }

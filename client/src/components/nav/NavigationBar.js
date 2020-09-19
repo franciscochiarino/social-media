@@ -68,10 +68,12 @@ function NavigationBar({ location, user }) {
   return (
     <section className={classes.root}>
 
+      {/* Logo */}
       <div className={classes.sideDivs} >
         <Typography variant="h5" color="primary">social media</Typography>
       </div>
 
+      {/* Navigation buttons */}
       <BottomNavigation className={classes.navIcons} value={value} onChange={handleChange} >
         <BottomNavigationAction href="#/" label="Home" value="home" icon={<HomeIcon />} />
         <BottomNavigationAction href="#/people" label="People" value="people" icon={<PeopleAltIcon />} />
@@ -79,10 +81,12 @@ function NavigationBar({ location, user }) {
       </BottomNavigation>
 
       {user ?
+        // "Go to profile" button
         <div className={classes.profileBtnDiv}>
             <StyledButton href={`#/profile/${user.id}`} size="small" className={classes.btn} variant="contained" color="primary">{user.firstName}</StyledButton>
         </div>
       :
+        // Login/SignUp buttons
         <div className={classes.sideDivs} >
             <StyledButton href="#/login" size="small" className={classes.btn} variant="contained" color="secondary">Login</StyledButton>
             <StyledButton href="#/signUp" size="small" className={classes.btn} variant="contained" color="primary">Sign Up</StyledButton>

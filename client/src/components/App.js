@@ -1,3 +1,4 @@
+// Modules
 import React, { useEffect, useContext, useState } from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 import { useAlert } from 'react-alert';
@@ -22,10 +23,11 @@ function App() {
   const [posts, setPosts] = useContext(PostsContext);
   const [updatePosts, setUpdatePosts] = useState(false);
   const alert = useAlert();
-
   const id = sessionStorage.getItem('id');
 
-  useEffect(() => {
+
+  // Check if user is logged in
+  useEffect(() => {   
     if (id) {
       getUser(id)
         .then(res => setUser(res.user))
@@ -33,6 +35,7 @@ function App() {
     }
   }, [id, setUser, alert]);
 
+  // Get posts and store them in context
   useEffect(() => {
     getPosts()
       .then(res => {
