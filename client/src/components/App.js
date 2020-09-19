@@ -12,6 +12,7 @@ import Login from './user/Login';
 import SignUp from './user/SignUp';
 import { getUser } from '../actions/userActions';
 import { UserContext } from '../context/UserContext';
+import { PostsProvider } from '../context/PostsContext';
 
 function App() {
   const [user, setUser] = useContext(UserContext);
@@ -29,14 +30,16 @@ function App() {
     <>
       <HashRouter>
           <NavigationBar user={user} />
-          <Switch>
-            <Route exact path="/" render={props => <Home {...props} user={user} /> } />
-            <Route exact path="/people" render={props => <People {...props} user={user} />} />
-            <Route exact path="/images" component={Images} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signUp" component={SignUp} />
-            <Route exact path="/profile/:id" component={UserProfile} />
-          </Switch>
+          <PostsProvider>
+            <Switch>
+              <Route exact path="/" render={props => <Home {...props} user={user} /> } />
+              <Route exact path="/people" render={props => <People {...props} user={user} />} />
+              <Route exact path="/images" component={Images} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signUp" component={SignUp} />
+              <Route exact path="/profile/:id" component={UserProfile} />
+            </Switch>
+          </PostsProvider>
       </HashRouter>
     </>
   );
