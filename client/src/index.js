@@ -6,6 +6,8 @@ import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import { ThemeProvider } from '@material-ui/styles';
 import Theme from './style/Theme';
+import { UserProvider } from './context/UserContext';
+
 
 // Alert Configuration
 const options = {
@@ -18,7 +20,9 @@ const options = {
 reactDOM.render(
   <ThemeProvider theme={Theme}>
     <AlertProvider template={AlertTemplate} {...options}>
-      <App/>
+      <UserProvider>
+        <App/>
+      </UserProvider>
     </AlertProvider>
   </ThemeProvider>
 ,document.getElementById("root"));

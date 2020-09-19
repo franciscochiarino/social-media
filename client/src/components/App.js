@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
-import { UserProvider } from '../context/UserContext';
 import '../main.scss';
 
 // Components
@@ -11,13 +10,25 @@ import Home from './home/Home';
 import UserProfile from './user/UserProfile';
 import Login from './user/Login';
 import SignUp from './user/SignUp';
+import { getUser } from '../actions/userActions';
+import { UserContext } from '../context/UserContext';
 
 function App() {
+  const [user, setUser] = useContext(UserContext);
+  const id = sessionStorage.getItem('id');
+
+  useEffect(() => {
+    if (id) {
+      getUser(id)
+        .then(res => setUser(res.user))
+        .catch(err => console.log(err));
+    }
+  }, [id, setUser]);
+
   return (
     <>
       <HashRouter>
-        <UserProvider>
-          <NavigationBar />
+          <NavigationBar user={user} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/people" component={People} />
@@ -26,7 +37,6 @@ function App() {
             <Route exact path="/signUp" component={SignUp} />
             <Route exact path="/profile/:id" component={UserProfile} />
           </Switch>
-        </UserProvider>
       </HashRouter>
     </>
   );

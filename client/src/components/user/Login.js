@@ -40,7 +40,12 @@ export default function Login() {
 
     login(email, password)
     .then(res => {
-      res.success ? setUser(res.user) : alert.error('Something went wrong...');
+      if (res.success) {
+        setUser(res.user);
+        sessionStorage.setItem('id', res.user.id);
+      } else {
+       alert.error('Something went wrong...');
+      }  
     })
     .catch(err => {
       console.log(err);

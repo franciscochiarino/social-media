@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { BottomNavigation, BottomNavigationAction, Typography } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import ImageIcon from '@material-ui/icons/Image';
 import StyledButton from '../../style/StyledButton';
-import { UserContext } from '../../context/UserContext';
 
 const useStyles = makeStyles({
   root: {
@@ -42,9 +41,8 @@ const useStyles = makeStyles({
   }
 })
 
-function NavigationBar({ location }) {
+function NavigationBar({ location, user }) {
   const [value, setValue] = useState('');
-  const [user, setUser] = useContext(UserContext);
   const classes = useStyles();
 
   useEffect(() => {
