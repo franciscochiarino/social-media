@@ -11,18 +11,18 @@ export default function Home({ user }) {
 
   useEffect(() => {
     getPosts()
-      .then(posts => {
-        setPosts(posts);
+      .then(res => {
+        setPosts(res.posts);
       })
       .catch(err => {
         console.log(err);
         alert.error('Something went wrong. Please try again later.');
       })
-  }, [posts, setPosts, alert]);
+  }, [setPosts, alert]);
 
-  const renderPosts = posts.map(({ id, author, date, content }) => {
+  const renderPosts = posts.map(({ _id, author, date, content }) => {
     return (
-      <PostCardContainer key={id} author={author} content={content} date={date} user={user} />
+      <PostCardContainer key={_id} author={author} content={content} date={date} user={user} />
     )
   });
 

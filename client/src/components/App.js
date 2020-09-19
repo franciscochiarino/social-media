@@ -14,7 +14,7 @@ import { getUser } from '../actions/userActions';
 import { UserContext } from '../context/UserContext';
 import { PostsProvider } from '../context/PostsContext';
 
-function App() {
+function App(props) {
   const [user, setUser] = useContext(UserContext);
   const id = sessionStorage.getItem('id');
 

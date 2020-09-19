@@ -28,7 +28,7 @@ export default function People({ user }) {
 
   const renderUsers = users.map(({ _id, firstName, lastName }) => {
     return (
-      <PeopleCardContainer id={_id} firstName={firstName} lastName={lastName} user={user} />
+      <PeopleCardContainer key={_id} id={_id} firstName={firstName} lastName={lastName} user={user} />
     )
   });
 

@@ -1,8 +1,8 @@
 export const getPosts = async () => {
   try {
     const data = await fetch('/posts');
-    const { posts } = await data.json();
-    return posts;
+    const res = await data.json();
+    return res;
   }
   catch(err) {
     return err;
