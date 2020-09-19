@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   }
 })
 
-export default function People() {
+export default function People({ user }) {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const classes = useStyles();
@@ -31,13 +31,12 @@ export default function People() {
 
   const renderUsers = users.map(({ _id, firstName, lastName }) => {
     return (
-      <PeopleCardContainer id={_id} firstName={firstName} lastName={lastName} />
+      <PeopleCardContainer id={_id} firstName={firstName} lastName={lastName} user={user} />
     )
   });
 
   return (
     <section className={classes.root} >
-      {loading ? new Array(10).fill(<PeopleCardSkeleton />) : null }
       {renderUsers}
     </section>
   )

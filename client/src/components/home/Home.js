@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PostCardContainer from './PostCardContainer';
-import PostCardSkeleton from '../skeletons/PostCardSkeleton';
 import { getPosts } from '../../actions/postActions';
 import PostForm from './PostForm';
 
@@ -25,7 +24,6 @@ export default function Home({ user }) {
   return (
     <>
       {user ? <PostForm user={user} /> : null}
-      {loading ? new Array(10).fill(<PostCardSkeleton />) : null }
       {renderPosts.reverse()}
     </>
   )

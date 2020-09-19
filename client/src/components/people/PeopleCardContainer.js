@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardHeader, Avatar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import StyledButton from '../../style/StyledButton';
+import PeopleCardSkeleton from '../skeletons/PeopleCardSkeleton';
 
 // Style
 const useStyles = makeStyles(() => ({
@@ -22,18 +23,25 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export default function PeopleCardContainer({ id, firstName, lastName }) {
+export default function PeopleCardContainer({ id, firstName, lastName, user }) {
   const classes = useStyles();
 
   return (
-    <>
-      <Card className={classes.root} >
-        <CardHeader avatar={ <Avatar src={`https://joeschmoe.io/api/v1/${id}`} /> } title={`${firstName} ${lastName}`} />
-        <div className={classes.btnContainer} >
-          <StyledButton href={`#/profile/${id}`} size="small" className={classes.btn} variant="contained" color="secondary">View Profile</StyledButton>
-          <StyledButton size="small" className={classes.btn} variant="contained" color="primary">Follow</StyledButton>
-        </div>
-      </Card>
-    </>
+    user ? (
+      user.id !== id ? (
+        <>
+          <Card className={classes.root} >
+            <CardHeader avatar={ <Avatar src={`https://joeschmoe.io/api/v1/${id}`} /> } title={`${firstName} ${lastName}`} />
+            <div className={classes.btnContainer} >
+              <StyledButton href={`#/profile/${id}`} size="small" className={classes.btn} variant="contained" color="secondary">View Profile</StyledButton>
+              <StyledButton size="small" className={classes.btn} variant="contained" color="primary">Follow</StyledButton>
+            </div>
+          </Card>
+        </>
+      ) : (null)
+      
+    ) : (
+      <PeopleCardSkeleton />
+    )
   )
 }
