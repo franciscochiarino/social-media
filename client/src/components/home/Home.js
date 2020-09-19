@@ -5,13 +5,11 @@ import PostForm from './PostForm';
 
 export default function Home({ user }) {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getPosts()
       .then(posts => {
         setPosts(posts);
-        setLoading(false);
       })
   }, []);
 

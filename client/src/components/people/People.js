@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PeopleCardContainer from './PeopleCardContainer';
-import PeopleCardSkeleton from '../skeletons/PeopleCardSkeleton';
 import { makeStyles } from '@material-ui/core/styles';
 import { getUsers } from '../../actions/userActions';
 import { useAlert } from 'react-alert';
@@ -13,7 +12,6 @@ const useStyles = makeStyles({
 
 export default function People({ user }) {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
   const classes = useStyles();
   const alert = useAlert();
 
@@ -21,7 +19,6 @@ export default function People({ user }) {
     getUsers()
       .then(users => {
         setUsers(users);
-        setLoading(false);
       })
       .catch(err => {
         console.log(err);
