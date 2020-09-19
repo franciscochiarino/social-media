@@ -50,7 +50,9 @@ function UserProfile({ location, user, posts, updatePosts, setUpdatePosts }) {
       })
   }, [alert, setProfile, id]);
 
-  const renderPosts = posts.map(({ _id, author, date, content }) => {
+  const profilePosts = posts.filter(({author}) => author.id === id);
+  
+  const renderProfilePosts = profilePosts.map(({ _id, author, date, content }) => {
     return (
       <PostCardContainer key={_id} id={_id} author={author} content={content} date={date} user={user} updatePosts={updatePosts} setUpdatePosts={setUpdatePosts} />
     )
@@ -61,19 +63,26 @@ function UserProfile({ location, user, posts, updatePosts, setUpdatePosts }) {
 
   return (
     <>
+
+      {/* Profile picture */}
       <Avatar className={classes.avatar} src={`https://joeschmoe.io/api/v1/${profile.id}`} />
 
       <div className={classes.cards} >
+
+        {/* Name and info */}
         <StyledCard className={classes.profileCard}>
           <Typography variant="h1">{`${profile.firstName} ${profile.lastName}`}</Typography>
           <Typography variant="subtitle1" >Member of social media since July 15, 2008</Typography>
         </StyledCard>
 
+        {/* Post title */}
         <StyledCard className={classes.postTitle}>
           <Typography variant="h5">Posts</Typography>
         </StyledCard>
 
-        {renderPosts}
+        {/* Posts */}
+        {renderProfilePosts.reverse()}
+
       </div>
 
     </>
