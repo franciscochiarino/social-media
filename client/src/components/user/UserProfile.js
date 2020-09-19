@@ -39,6 +39,7 @@ function UserProfile({ location, user, posts, updatePosts, setUpdatePosts }) {
   // Get user id from query string
   const id = location.pathname.split('/')[2];
 
+  // Get the corresponding user
   useEffect(() => {
     getUser(id)
       .then(res => {
@@ -50,15 +51,17 @@ function UserProfile({ location, user, posts, updatePosts, setUpdatePosts }) {
       })
   }, [alert, setProfile, id]);
 
+  // Filter posts writen by the corresponding user
   const profilePosts = posts.filter(({author}) => author.id === id);
   
+  // Render posts
   const renderProfilePosts = profilePosts.map(({ _id, author, date, content }) => {
     return (
       <PostCardContainer key={_id} id={_id} author={author} content={content} date={date} user={user} updatePosts={updatePosts} setUpdatePosts={setUpdatePosts} />
     )
   });
 
-  // Wait for getUser request
+  // Wait for getUser request to display content
   if (!profile) return null;
 
   return (
