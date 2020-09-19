@@ -17,10 +17,7 @@ export default function Home({ user }) {
       .then(res => {
         setPosts(res.posts);
       })
-      .catch(err => {
-        console.log(err);
-        alert.error('Something went wrong. Please try again later.');
-      })
+      .catch(err => alert.error('Something went wrong. Please try again later.', { onOpen: () => console.log(err) }));
   }, [setPosts, alert, updatePosts]);
 
   const handlePostForm = (e, content) => {
@@ -29,10 +26,7 @@ export default function Home({ user }) {
     if (user) {
       addPost(user.id, user.firstName, user.lastName, content)
         .then(() => setUpdatePosts(!updatePosts))
-        .catch(err => {
-          console.log(err);
-          alert.error('Something went wrong. Please try again later');
-        });
+        .catch(err => alert.error('Something went wrong. Please try again later', { onOpen: () => console.log(err) }));
     } else {
       alert.info('Please log in to post something.');
     }
@@ -41,7 +35,7 @@ export default function Home({ user }) {
   const handleDeletePostButton = (postId) => {
     deletePost(postId)
       .then(() => setUpdatePosts(!updatePosts))
-      .catch(err => console.log(err));
+      .catch(err => alert.error('Something went wrong. Please try again later', { onOpen: () => console.log(err) }));
   };
 
   const renderPosts = posts.map(({ _id, author, date, content }) => {
