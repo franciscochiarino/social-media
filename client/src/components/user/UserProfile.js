@@ -5,6 +5,7 @@ import StyledCard from '../../style/StyledCard';
 import { getUser } from '../../actions/userActions';
 import { useAlert } from 'react-alert';
 import { withRouter } from 'react-router-dom';
+import PostCardContainer from '../home/PostCardContainer';
 
 const useStyles = makeStyles(() => ({
   avatar: {
@@ -13,22 +14,24 @@ const useStyles = makeStyles(() => ({
     position: 'relative',
     margin: '0 auto',
     top: '40px',
-    zIndex: 8
+    zIndex: 1
   },
   cards: {
-    textAlign: 'center',
     position: 'relative',
     top: '-70px'
   },
   profileCard: {
+    textAlign: 'center',
     padding: '6rem 0 2rem 0',
   },
   postTitle: {
-    padding: '0.5rem 0'
+    textAlign: 'center',
+    padding: '0.5rem 0',
+    marginBottom: '0',
   }
 }));
 
-function UserProfile({ location }) {
+function UserProfile({ location, user, posts, updatePosts, setUpdatePosts }) {
   const classes = useStyles();
   const alert = useAlert();
   const [profile, setProfile] = useState(null);
@@ -47,6 +50,12 @@ function UserProfile({ location }) {
       })
   }, [alert, setProfile, id]);
 
+  const renderPosts = posts.map(({ _id, author, date, content }) => {
+    return (
+      <PostCardContainer key={_id} id={_id} author={author} content={content} date={date} user={user} updatePosts={updatePosts} setUpdatePosts={setUpdatePosts} />
+    )
+  });
+
   // Wait for getUser request
   if (!profile) return null;
 
@@ -63,7 +72,10 @@ function UserProfile({ location }) {
         <StyledCard className={classes.postTitle}>
           <Typography variant="h5">Posts</Typography>
         </StyledCard>
+
+        {renderPosts}
       </div>
+
     </>
   )
 }

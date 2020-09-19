@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import StyledCard from '../../style/StyledCard';
 import StyledButton from '../../style/StyledButton';
 import { CardHeader, Avatar, TextField } from '@material-ui/core';
+import { addPost } from '../../actions/postActions';
 
 const divStyle = {
   display: 'flex',
@@ -13,8 +14,20 @@ const postButtonStyle = {
   borderRadius: '0px 0px 15px 15px',
 }
 
-export default function PostForm({ user, handlePostForm }) {
+export default function PostForm({ user, updatePosts, setUpdatePosts }) {
   const [content, setContent] = useState('initialState');
+
+  const handlePostForm = (e, content) => {
+    e.preventDefault();
+
+    if (user) {
+      addPost(user.id, user.firstName, user.lastName, content)
+        .then(() => setUpdatePosts(!updatePosts))
+        .catch(err => alert.error('Something went wrong. Please try again later', { onOpen: () => console.log(err) }));
+    } else {
+      alert.info('Please log in to post something.');
+    }
+  };
 
   return (
     <StyledCard>

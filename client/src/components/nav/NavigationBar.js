@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   root: {
     position: 'fixed',
     top: '0px',
-    zIndex: '1',
+    zIndex: '2',
     width: '100%',
     borderBottom: '1px solid #dfe1e3',
     boxShadow: '0px 1px 2px 0px rgba(209,209,209,0.75)',

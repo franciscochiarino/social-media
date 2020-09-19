@@ -7,6 +7,7 @@ import AlertTemplate from 'react-alert-template-basic';
 import { ThemeProvider } from '@material-ui/styles';
 import Theme from './style/Theme';
 import { UserProvider } from './context/UserContext';
+import { PostsProvider } from './context/PostsContext';
 
 
 // Alert Configuration
@@ -21,7 +22,9 @@ reactDOM.render(
   <ThemeProvider theme={Theme}>
     <AlertProvider template={AlertTemplate} {...options}>
       <UserProvider>
-        <App/>
+        <PostsProvider>
+          <App/>
+        </PostsProvider>
       </UserProvider>
     </AlertProvider>
   </ThemeProvider>

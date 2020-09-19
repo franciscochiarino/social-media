@@ -5,6 +5,8 @@ import ShareIcon from '@material-ui/icons/Share';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import StyledCard from '../../style/StyledCard';
+import { deletePost } from '../../actions/postActions';
+
 // import PostCardSkeleton from '../skeletons/PostCardSkeleton';
 
 const cardHeaderStyle = {
@@ -13,7 +15,13 @@ const cardHeaderStyle = {
   alignItems: 'center'
 }
 
-export default function PostCardContainer({ id, author, date, content, user, handleDeletePostButton }) {
+export default function PostCardContainer({ id, author, date, content, user, updatePosts, setUpdatePosts }) {
+
+  const handleDeletePostButton = (postId) => {
+    deletePost(postId)
+      .then(() => setUpdatePosts(!updatePosts))
+      .catch(err => alert.error('Something went wrong. Please try again later', { onOpen: () => console.log(err) }));
+  };
 
   return (
       <>
