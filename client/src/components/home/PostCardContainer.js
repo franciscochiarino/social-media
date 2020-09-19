@@ -16,7 +16,6 @@ const cardHeaderStyle = {
 export default function PostCardContainer({ author, date, content, user }) {
 
   return (
-    user ? (
       <>
         <StyledCard>
 
@@ -29,7 +28,7 @@ export default function PostCardContainer({ author, date, content, user }) {
               subheader={new Date(date).toLocaleDateString()} 
             />
 
-            {user.id === author.id ? 
+            {user && user.id === author.id ? 
               <div>
                 <IconButton aria-label="edit">
                   <EditIcon />
@@ -58,8 +57,6 @@ export default function PostCardContainer({ author, date, content, user }) {
 
         </StyledCard>
       </>
-    ) : (
-      <PostCardSkeleton />
-    )
+      // <PostCardSkeleton />
   )
 }
