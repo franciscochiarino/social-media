@@ -21,7 +21,7 @@ export default function PostCardContainer({ author, date, content }) {
         <div style={cardHeaderStyle}>
           <CardHeader 
             avatar={ <Avatar src={`https://joeschmoe.io/api/v1/${author.id}`} /> } 
-            title={author} 
+            title={`${author.firstName} ${author.lastName}`} 
             titleTypographyProps={{ variant: "h6"}} 
             // FIXME: Display the date properly
             subheader={new Date(date).toLocaleDateString()} 
