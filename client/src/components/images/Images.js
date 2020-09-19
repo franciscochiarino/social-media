@@ -51,12 +51,12 @@ export default function Images() {
       });
   }, []);
 
-  const renderImages = images.map(({ thumbnailUrl, title }) => {
+  const renderImages = images.map(({ id, thumbnailUrl, title }) => {
     const imageStyle = !imageIsLoaded ? { display: 'none' } : {};
 
     return(
-      <Grid className={classes.item} container item xs={4} spacing={1}>
-        <Paper className={classes.paper} elevation="3">
+      <Grid key={id} className={classes.item} container item xs={4} spacing={1}>
+        <Paper className={classes.paper} elevation={3}>
           { !imageIsLoaded ? <ImageSkeleton /> : null }
           <img className={classes.image} src={thumbnailUrl} alt={title} style={imageStyle} onLoad={() => setImageIsLoaded(true)} />
         </Paper>

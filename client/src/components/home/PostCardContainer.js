@@ -5,7 +5,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import StyledCard from '../../style/StyledCard';
-import PostCardSkeleton from '../skeletons/PostCardSkeleton';
+// import PostCardSkeleton from '../skeletons/PostCardSkeleton';
 
 const cardHeaderStyle = {
   display: 'flex', 
