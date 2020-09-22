@@ -9,12 +9,12 @@ export const getPosts = async () => {
   }
 };
 
-export const addPost = async (id, firstName, lastName, content) => {
+export const addPost = async (postId, firstName, lastName, content) => {
   const options = {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
-      author: { id, firstName, lastName },
+      author: { id: postId, firstName, lastName },
       content
     })
   };
@@ -45,6 +45,15 @@ export const editPost = async (postId, updatedContent) => {
     return err;
   }
 };
+
+// export const toggleLike = async (userId, postId) => {
+
+//   // Check if user already liked that post
+//   try {
+//     const data = fetch(`posts`)
+//   }
+
+// };
 
 export const deletePost = async (postId) => {
   const options = {
