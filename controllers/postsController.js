@@ -12,18 +12,6 @@ exports.getPosts = async (req, res, next) => {
   }
 };
 
-exports.getPost = async (req, res, next) => {
-  const { id } = req.params;
-
-  try {
-    const post = await Post.findById(id);
-    res.json({ success: true, post });
-  }
-  catch(err) {
-    next(err);
-  }
-}
-
 exports.postPost = async (req, res, next) => {
   try {
     const post = new Post(req.body);

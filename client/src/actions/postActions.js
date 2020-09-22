@@ -1,3 +1,5 @@
+import e from "express";
+
 export const getPosts = async () => {
   try {
     const data = await fetch('/posts');
@@ -46,14 +48,22 @@ export const editPost = async (postId, updatedContent) => {
   }
 };
 
-// export const toggleLike = async (userId, postId) => {
+export const toggleLike = async (userId, postId) => {
+  try {
+    const data = await fetch(`posts`);
+    const { post } = await data.json();
 
-//   // Check if user already liked that post
-//   try {
-//     const data = fetch(`posts`)
-//   }
+    // Check if user already liked that post
+    const likeIndex = await post.likes.findIndex(id => id === userId);
 
-// };
+    if (likeIndex) {
+      post.likes.splice(likeIndex, 1);
+    } else {
+      
+    }
+  }
+
+};
 
 export const deletePost = async (postId) => {
   const options = {
