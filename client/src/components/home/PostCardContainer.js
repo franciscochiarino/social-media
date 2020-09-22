@@ -29,55 +29,54 @@ export default function PostCardContainer({ id, author, date, content, user, upd
   return (
       <>
         <StyledCard>
+            <form>
 
-          <div style={cardHeaderStyle}>
+            <div style={cardHeaderStyle}>
+              {/* Post header */}
+              <CardHeader 
+                avatar={ <Avatar src={`https://joeschmoe.io/api/v1/${author.id}`} /> } 
+                title={`${author.firstName} ${author.lastName}`} 
+                titleTypographyProps={{ variant: "h6"}} 
+                // FIXME: Display the date properly
+                subheader={new Date(date).toLocaleDateString()} 
+              />
+
+              {/* Edit/Delete buttons */}
+              {user && user.id === author.id ? 
+                <div>
+                  <IconButton aria-label="edit" title="Edit">
+                    <EditIcon onClick={() => setEditPost(true)} />
+                  </IconButton>
+                  <IconButton aria-label="delete" title="Delete" style={{ marginRight: '0.5rem' }} onClick={() => handleDeletePostButton(id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </div>
+              : null }
+            </div>
+
+            {/* Post content / Edit post*/}
+            <CardContent >
+              { editPost ? 
+                  <TextField id='outlined-basic' fullWidth value={editPostContent} onChange={e => setEditPostContent(e.target.value)} />
+              :
+                <Typography variant="body1">
+                  {content}
+                </Typography> 
+              }
+            </CardContent>
             
-            {/* Post header */}
-            <CardHeader 
-              avatar={ <Avatar src={`https://joeschmoe.io/api/v1/${author.id}`} /> } 
-              title={`${author.firstName} ${author.lastName}`} 
-              titleTypographyProps={{ variant: "h6"}} 
-              // FIXME: Display the date properly
-              subheader={new Date(date).toLocaleDateString()} 
-            />
 
-            {/* Edit/Delete buttons */}
-            {user && user.id === author.id ? 
-              <div>
-                <IconButton aria-label="edit" title="Edit">
-                  <EditIcon onClick={() => setEditPost(true)} />
-                </IconButton>
-                <IconButton aria-label="delete" title="Delete" style={{ marginRight: '0.5rem' }} onClick={() => handleDeletePostButton(id)}>
-                  <DeleteIcon />
-                </IconButton>
-              </div>
-            : null }
-          </div>
+            {/* Like/Share buttons */}
+            <CardActions disableSpacing>
+              <IconButton aria-label="like" title="Like">
+                <FavoriteIcon />
+              </IconButton>
+              <IconButton aria-label="share" title="Share">
+                <ShareIcon />
+              </IconButton>
+            </CardActions>
 
-          {/* Post content / Edit post*/}
-          <CardContent >
-            { editPost ? 
-              <form>
-                <TextField id='outlined-basic' fullWidth value={editPostContent} onChange={e => setEditPostContent(e.target.value)} />
-              </form>
-            :
-              <Typography variant="body1">
-                {content}
-              </Typography> 
-            }
-          </CardContent>
-          
-
-          {/* Like/Share buttons */}
-          <CardActions disableSpacing>
-            <IconButton aria-label="like" title="Like">
-              <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="share" title="Share">
-              <ShareIcon />
-            </IconButton>
-          </CardActions>
-
+          </form>
         </StyledCard>
       </>
       // <PostCardSkeleton />
