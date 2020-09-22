@@ -25,13 +25,14 @@ exports.postPost = async (req, res, next) => {
 
 exports.putPost = async (req, res, next) => {
   const { id } = req.params;
-  const post = req.body;
+
   try {
-    const updatedPost = await Post.findByIdAndUpdate(id, post, { new: true });
+    const updatedPost = await Post.findByIdAndUpdate(id, req.body, { new: true });
     if (!updatedPost) throw createError(404);
     res.json({ success: true, updatedPost });
   }
   catch(err) {
+    console.log(err)
     next(err);
   }
 };

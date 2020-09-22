@@ -6,7 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import DeleteIcon from '@material-ui/icons/Delete';
 import StyledCard from '../../style/StyledCard';
-import { deletePost } from '../../actions/postActions';
+import { editPost, deletePost } from '../../actions/postActions';
 
 // import PostCardSkeleton from '../skeletons/PostCardSkeleton';
 
@@ -16,13 +16,17 @@ const cardHeaderStyle = {
   alignItems: 'center'
 }
 
-export default function PostCardContainer({ id, author, date, content, user, updatePosts, setUpdatePosts }) {
-  const [editPost, setEditPost] = useState(false);
+export default function PostCardContainer({ postId, author, date, content, user, updatePosts, setUpdatePosts }) {
+  const [postIsBeingEdited, setPostIsBeingEdited] = useState(false);
   const [editPostContent, setEditPostContent] = useState(content);
 
   // Edit post
-  const handleEditPostForm = (e, updatedContent) => {
-    console.log('holaa')
+  const handleEditPostForm = (e, postId, updatedContent) => {
+    e.preventDefault();
+
+    editPost(postId, updatedContent)
+      .then(() => setPostIsBeingEdited(false))
+      .catch(err => alert.error('Something went wrong. Please try again later', { onOpen: () => console.log(err) }));
   };
 
   // Delete Post
@@ -35,7 +39,7 @@ export default function PostCardContainer({ id, author, date, content, user, upd
   return (
       <>
         <StyledCard>
-            <form>
+          <form onSubmit={(e, postId, editPostContent) => handleEditPostForm(e, postId, editPostContent)}>
 
             <div style={cardHeaderStyle}>
               {/* Post header */}
@@ -50,16 +54,16 @@ export default function PostCardContainer({ id, author, date, content, user, upd
               {/* Edit/Delete buttons */}
               {user && user.id === author.id ? 
                 <div>
-                  { editPost ?
-                    <IconButton aria-label="edit" title="Post">
-                      <PostAddIcon type="submit" color="primary" />
+                  { postIsBeingEdited ?
+                    <IconButton aria-label="edit" title="Post" type="submit">
+                      <PostAddIcon color="primary" />
                     </IconButton>
                   :
-                    <IconButton aria-label="edit" title="Edit">
-                      <EditIcon onClick={() => setEditPost(true)} />
+                    <IconButton aria-label="edit" title="Edit" onMouseUp={() => setPostIsBeingEdited(true)}>
+                      <EditIcon />
                     </IconButton>
                   }
-                  <IconButton aria-label="delete" title="Delete" style={{ marginRight: '0.5rem' }} onClick={() => handleDeletePostButton(id)}>
+                  <IconButton aria-label="delete" title="Delete" style={{ marginRight: '0.5rem' }} onClick={() => handleDeletePostButton(postId)}>
                     <DeleteIcon />
                   </IconButton>
                 </div>
@@ -68,8 +72,8 @@ export default function PostCardContainer({ id, author, date, content, user, upd
 
             {/* Post content / Edit post*/}
             <CardContent >
-              { editPost ? 
-                  <TextField id='outlined-basic' fullWidth value={editPostContent} onChange={e => setEditPostContent(e.target.value)} />
+              { postIsBeingEdited ? 
+                <TextField id='outlined-basic' fullWidth value={editPostContent} onChange={e => setEditPostContent(e.target.value)} />
               :
                 <Typography variant="body1">
                   {content}

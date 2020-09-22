@@ -57,7 +57,7 @@ function UserProfile({ location, user, posts, updatePosts, setUpdatePosts }) {
   // Render posts
   const renderProfilePosts = profilePosts.map(({ _id, author, date, content }) => {
     return (
-      <PostCardContainer key={_id} id={_id} author={author} content={content} date={date} user={user} updatePosts={updatePosts} setUpdatePosts={setUpdatePosts} />
+      <PostCardContainer key={_id} postId={_id} author={author} content={content} date={date} user={user} updatePosts={updatePosts} setUpdatePosts={setUpdatePosts} />
     )
   });
 
