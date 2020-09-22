@@ -25,7 +25,11 @@ export default function PostCardContainer({ postId, author, date, content, user,
     e.preventDefault();
 
     editPost(postId, updatedContent)
-      .then(() => setPostIsBeingEdited(false))
+      .then(() => {
+        setUpdatePosts(!updatePosts);
+        // TODO: Put a loading between these two functions so it doesn't look snappy
+        setPostIsBeingEdited(false);
+      })
       .catch(err => alert.error('Something went wrong. Please try again later', { onOpen: () => console.log(err) }));
   };
 
@@ -39,7 +43,7 @@ export default function PostCardContainer({ postId, author, date, content, user,
   return (
       <>
         <StyledCard>
-          <form onSubmit={(e, postId, editPostContent) => handleEditPostForm(e, postId, editPostContent)}>
+          <form onSubmit={e => handleEditPostForm(e, postId, editPostContent)}>
 
             <div style={cardHeaderStyle}>
               {/* Post header */}

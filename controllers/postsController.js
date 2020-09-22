@@ -19,6 +19,7 @@ exports.postPost = async (req, res, next) => {
     res.json({ success: true, post });
   }
   catch(err) {
+    console.log(err)
     next(err);
   }
 };

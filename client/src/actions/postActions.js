@@ -9,12 +9,12 @@ export const getPosts = async () => {
   }
 };
 
-export const addPost = async (userId, firstName, lastName, content) => {
+export const addPost = async (id, firstName, lastName, content) => {
   const options = {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
-      author: { userId, firstName, lastName },
+      author: { id, firstName, lastName },
       content
     })
   };
@@ -35,6 +35,8 @@ export const editPost = async (postId, updatedContent) => {
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ content: updatedContent, edited: true }),
   }
+  console.log(postId);
+  console.log(updatedContent)
 
   try {
     const data = fetch(`posts/${postId}`, options);
