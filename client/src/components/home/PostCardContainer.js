@@ -3,6 +3,7 @@ import { CardHeader, CardContent, CardActions, IconButton, Typography, Avatar, T
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import EditIcon from '@material-ui/icons/Edit';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 import DeleteIcon from '@material-ui/icons/Delete';
 import StyledCard from '../../style/StyledCard';
 import { deletePost } from '../../actions/postActions';
@@ -18,6 +19,11 @@ const cardHeaderStyle = {
 export default function PostCardContainer({ id, author, date, content, user, updatePosts, setUpdatePosts }) {
   const [editPost, setEditPost] = useState(false);
   const [editPostContent, setEditPostContent] = useState(content);
+
+  // Edit post
+  const handleEditPostForm = (e, updatedContent) => {
+    console.log('holaa')
+  };
 
   // Delete Post
   const handleDeletePostButton = (postId) => {
@@ -44,9 +50,15 @@ export default function PostCardContainer({ id, author, date, content, user, upd
               {/* Edit/Delete buttons */}
               {user && user.id === author.id ? 
                 <div>
-                  <IconButton aria-label="edit" title="Edit">
-                    <EditIcon onClick={() => setEditPost(true)} />
-                  </IconButton>
+                  { editPost ?
+                    <IconButton aria-label="edit" title="Post">
+                      <PostAddIcon type="submit" color="primary" />
+                    </IconButton>
+                  :
+                    <IconButton aria-label="edit" title="Edit">
+                      <EditIcon onClick={() => setEditPost(true)} />
+                    </IconButton>
+                  }
                   <IconButton aria-label="delete" title="Delete" style={{ marginRight: '0.5rem' }} onClick={() => handleDeletePostButton(id)}>
                     <DeleteIcon />
                   </IconButton>
