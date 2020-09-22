@@ -55,7 +55,7 @@ function UserProfile({ location, user, posts, updatePosts, setUpdatePosts }) {
   const profilePosts = posts.filter(({author}) => author.id === id);
   
   // Render posts
-  const renderProfilePosts = profilePosts.map(({ _id, author, date, content }) => {
+  const renderProfilePosts = profilePosts.map(({ _id, author, date, content, likes }) => {
     return (
       <PostCardContainer key={_id} postId={_id} author={author} content={content} date={date} user={user} likes={likes} updatePosts={updatePosts} setUpdatePosts={setUpdatePosts} />
     )

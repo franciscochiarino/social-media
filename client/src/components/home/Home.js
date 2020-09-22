@@ -4,7 +4,7 @@ import PostForm from './PostForm';
 
 export default function Home({ user, posts, updatePosts, setUpdatePosts }) {
 
-  const renderPosts = posts.map(({ _id, author, date, content }) => {
+  const renderPosts = posts.map(({ _id, author, date, content, likes }) => {
     return (
       <PostCardContainer key={_id} postId={_id} author={author} content={content} date={date} user={user} likes={likes} updatePosts={updatePosts} setUpdatePosts={setUpdatePosts} />
     )

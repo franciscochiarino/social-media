@@ -1,5 +1,3 @@
-import e from "express";
-
 export const getPosts = async () => {
   try {
     const data = await fetch('/posts');

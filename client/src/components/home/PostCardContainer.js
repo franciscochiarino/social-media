@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CardHeader, CardContent, CardActions, IconButton, Typography, Avatar, TextField } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
@@ -7,6 +7,7 @@ import PostAddIcon from '@material-ui/icons/PostAdd';
 import DeleteIcon from '@material-ui/icons/Delete';
 import StyledCard from '../../style/StyledCard';
 import { editPost, deletePost } from '../../actions/postActions';
+import { useAlert } from 'react-alert';
 
 // import PostCardSkeleton from '../skeletons/PostCardSkeleton';
 
@@ -16,12 +17,30 @@ const cardHeaderStyle = {
   alignItems: 'center'
 }
 
-export default function PostCardContainer({ postId, author, date, content, user, updatePosts, setUpdatePosts }) {
+export default function PostCardContainer({ postId, author, date, content, user, likes, updatePosts, setUpdatePosts }) {
   const [postIsBeingEdited, setPostIsBeingEdited] = useState(false);
   const [editPostContent, setEditPostContent] = useState(content);
+  const [userLikedPost, setUserLikedPost] = useState(false);
+  const alert = useAlert();
+
+  useEffect(() => {
+    // Check if user is logged in
+    const userId = sessionStorage.getItem('id');
+    if (!userId) {
+      return alert.error('You must be logged in to like posts.');
+    }
+
+    // Check if user has already liked this post
+    const likeIndex = likes.findIndex(id => id === userId);
+    if (likeIndex) {
+      setUserLikedPost(true);
+    }
+  }, []);
 
   // Like post
   const handleLikeButton = () => {
+
+    
 
   };
 
@@ -95,7 +114,7 @@ export default function PostCardContainer({ postId, author, date, content, user,
             {/* Like/Share buttons */}
             <CardActions disableSpacing>
               <IconButton aria-label="like" title="Like" onClick={handleLikeButton}>
-                <FavoriteIcon />
+                <FavoriteIcon color="action"/>
               </IconButton>
               <IconButton aria-label="share" title="Share">
                 <ShareIcon />
