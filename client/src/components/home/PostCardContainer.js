@@ -43,10 +43,12 @@ export default function PostCardContainer({ postId, author, date, content, user,
   return (
       <>
         <StyledCard>
-          <form onSubmit={e => handleEditPostForm(e, postId, editPostContent)}>
 
+          {/* Form is created so post can be edited */}
+          <form onSubmit={e => handleEditPostForm(e, postId, editPostContent)}>
             <div style={cardHeaderStyle}>
-              {/* Post header */}
+
+              {/* Avatar, Name and Date */}
               <CardHeader 
                 avatar={ <Avatar src={`https://joeschmoe.io/api/v1/${author.id}`} /> } 
                 title={`${author.firstName} ${author.lastName}`} 
@@ -74,7 +76,7 @@ export default function PostCardContainer({ postId, author, date, content, user,
               : null }
             </div>
 
-            {/* Post content / Edit post*/}
+            {/* Post content / Edit post */}
             <CardContent >
               { postIsBeingEdited ? 
                 <TextField id='outlined-basic' fullWidth value={editPostContent} onChange={e => setEditPostContent(e.target.value)} />

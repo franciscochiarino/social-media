@@ -19,7 +19,6 @@ exports.postPost = async (req, res, next) => {
     res.json({ success: true, post });
   }
   catch(err) {
-    console.log(err)
     next(err);
   }
 };
@@ -33,7 +32,6 @@ exports.putPost = async (req, res, next) => {
     res.json({ success: true, updatedPost });
   }
   catch(err) {
-    console.log(err)
     next(err);
   }
 };

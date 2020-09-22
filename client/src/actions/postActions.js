@@ -35,8 +35,6 @@ export const editPost = async (postId, updatedContent) => {
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ content: updatedContent, edited: true }),
   }
-  console.log(postId);
-  console.log(updatedContent)
 
   try {
     const data = fetch(`posts/${postId}`, options);
