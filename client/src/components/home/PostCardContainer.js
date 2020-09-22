@@ -1,5 +1,5 @@
-import React from 'react';
-import { CardHeader, CardContent, CardActions, IconButton, Typography, Avatar } from '@material-ui/core';
+import React, { useState } from 'react';
+import { CardHeader, CardContent, CardActions, IconButton, Typography, Avatar, TextField } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import EditIcon from '@material-ui/icons/Edit';
@@ -16,6 +16,8 @@ const cardHeaderStyle = {
 }
 
 export default function PostCardContainer({ id, author, date, content, user, updatePosts, setUpdatePosts }) {
+  const [editPost, setEditPost] = useState(false);
+  const [editPostContent, setEditPostContent] = useState(content);
 
   // Delete Post
   const handleDeletePostButton = (postId) => {
@@ -43,7 +45,7 @@ export default function PostCardContainer({ id, author, date, content, user, upd
             {user && user.id === author.id ? 
               <div>
                 <IconButton aria-label="edit" title="Edit">
-                  <EditIcon />
+                  <EditIcon onClick={() => setEditPost(true)} />
                 </IconButton>
                 <IconButton aria-label="delete" title="Delete" style={{ marginRight: '0.5rem' }} onClick={() => handleDeletePostButton(id)}>
                   <DeleteIcon />
@@ -52,12 +54,19 @@ export default function PostCardContainer({ id, author, date, content, user, upd
             : null }
           </div>
 
-          {/* Post content */}
+          {/* Post content / Edit post*/}
           <CardContent >
-            <Typography variant="body1">
-              {content}
-            </Typography> 
+            { editPost ? 
+              <form>
+                <TextField id='outlined-basic' fullWidth value={editPostContent} onChange={e => setEditPostContent(e.target.value)} />
+              </form>
+            :
+              <Typography variant="body1">
+                {content}
+              </Typography> 
+            }
           </CardContent>
+          
 
           {/* Like/Share buttons */}
           <CardActions disableSpacing>
