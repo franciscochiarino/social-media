@@ -26,14 +26,13 @@ export default function PostCardContainer({ postId, author, date, content, user,
   useEffect(() => {
     // Check if user is logged in
     const userId = sessionStorage.getItem('id');
-    if (!userId) {
-      return alert.error('You must be logged in to like posts.');
-    }
 
     // Check if user has already liked this post
-    const likeIndex = likes.findIndex(id => id === userId);
-    if (likeIndex) {
-      setUserLikedPost(true);
+    if (userId) {
+      const likeIndex = likes.findIndex(id => id === userId);
+      if (likeIndex) {
+        setUserLikedPost(true);
+      }
     }
   }, []);
 
@@ -111,10 +110,10 @@ export default function PostCardContainer({ postId, author, date, content, user,
             </CardContent>
             
 
-            {/* Like/Share buttons */}
+            {/* Like / Share buttons */}
             <CardActions disableSpacing>
               <IconButton aria-label="like" title="Like" onClick={handleLikeButton}>
-                <FavoriteIcon color="action"/>
+                <FavoriteIcon style={{ color: userLikedPost ? 'red' : 'default' }} />
               </IconButton>
               <IconButton aria-label="share" title="Share">
                 <ShareIcon />
