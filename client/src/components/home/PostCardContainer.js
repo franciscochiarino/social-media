@@ -20,27 +20,35 @@ const cardHeaderStyle = {
 export default function PostCardContainer({ postId, author, date, content, user, likes, updatePosts, setUpdatePosts }) {
   const [postIsBeingEdited, setPostIsBeingEdited] = useState(false);
   const [editPostContent, setEditPostContent] = useState(content);
-  const [userLikedPost, setUserLikedPost] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const [likeIndex, setLikeIndex] = useState(null);
   const alert = useAlert();
 
   useEffect(() => {
     // Check if user is logged in
-    const userId = sessionStorage.getItem('id');
+    const id = sessionStorage.getItem('id');
 
     // Check if user has already liked this post
-    if (userId) {
-      const likeIndex = likes.findIndex(id => id === userId);
-      if (likeIndex) {
-        setUserLikedPost(true);
+    if (id) {
+      const index = likes.findIndex(id => id === userId);
+      setUserId(id);
+      if (index) {
+        setLikeIndex(index);
       }
     }
-  }, []);
+  }, [likes]);
 
   // Like post
   const handleLikeButton = () => {
+    let updatedLikes;
+
+    if (likeIndex) {
+      updatedLikes = likes.splice(likeIndex, 1);
+    } else {
+      updatedLikes = [...likes.push(userId)];
+    }
 
     
-
   };
 
   // Edit post
@@ -113,7 +121,7 @@ export default function PostCardContainer({ postId, author, date, content, user,
             {/* Like / Share buttons */}
             <CardActions disableSpacing>
               <IconButton aria-label="like" title="Like" onClick={handleLikeButton}>
-                <FavoriteIcon style={{ color: userLikedPost ? 'red' : 'default' }} />
+                <FavoriteIcon style={{ color: likeIndex ? 'red' : 'default' }} />
               </IconButton>
               <IconButton aria-label="share" title="Share">
                 <ShareIcon />
