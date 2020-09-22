@@ -20,10 +20,14 @@ export default function PostCardContainer({ postId, author, date, content, user,
   const [postIsBeingEdited, setPostIsBeingEdited] = useState(false);
   const [editPostContent, setEditPostContent] = useState(content);
 
+  // Like post
+  const handleLikeButton = () => {
+
+  };
+
   // Edit post
   const handleEditPostForm = (e, postId, updatedContent) => {
     e.preventDefault();
-
     editPost(postId, updatedContent)
       .then(() => {
         setUpdatePosts(!updatePosts);
@@ -90,7 +94,7 @@ export default function PostCardContainer({ postId, author, date, content, user,
 
             {/* Like/Share buttons */}
             <CardActions disableSpacing>
-              <IconButton aria-label="like" title="Like">
+              <IconButton aria-label="like" title="Like" onClick={handleLikeButton}>
                 <FavoriteIcon />
               </IconButton>
               <IconButton aria-label="share" title="Share">

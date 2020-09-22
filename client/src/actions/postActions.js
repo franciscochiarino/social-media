@@ -49,20 +49,7 @@ export const editPost = async (postId, updatedContent) => {
 };
 
 export const toggleLike = async (userId, postId) => {
-  try {
-    const data = await fetch(`posts`);
-    const { post } = await data.json();
-
-    // Check if user already liked that post
-    const likeIndex = await post.likes.findIndex(id => id === userId);
-
-    if (likeIndex) {
-      post.likes.splice(likeIndex, 1);
-    } else {
-      
-    }
-  }
-
+  
 };
 
 export const deletePost = async (postId) => {
