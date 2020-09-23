@@ -38,7 +38,9 @@ export default function PostCardContainer({ postId, author, date, content, user,
       if (likes[index] === id) {
         console.log('likes[likeIndex]: ', likes[index])
         setUserLikedPost(true);
+        setLikeIndex(index);
       }
+      setUserId(id);
     }
   }, [likes]);
 
@@ -51,6 +53,7 @@ export default function PostCardContainer({ postId, author, date, content, user,
     if (userLikedPost) {
       likes.splice(likeIndex, 1);
       updatedLikes = likes;
+      setUserLikedPost(false);
       console.log('updated likes if userLikedPost is true: ', updatedLikes)
     } else {
       likes.push(userId);
