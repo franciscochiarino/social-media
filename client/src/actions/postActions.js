@@ -21,7 +21,7 @@ export const addPost = async (postId, firstName, lastName, content) => {
 
   try {
     const data = await fetch('/posts', options);
-    const res = data.json();
+    const res = await data.json();
     return res;
   }
   catch(err) {
@@ -37,8 +37,8 @@ export const editPost = async (postId, updatedContent) => {
   }
 
   try {
-    const data = fetch(`posts/${postId}`, options);
-    const res = data.json();
+    const data = await fetch(`posts/${postId}`, options);
+    const res = await data.json();
     return res;
   }
   catch(err) {
@@ -46,8 +46,21 @@ export const editPost = async (postId, updatedContent) => {
   }
 };
 
-export const toggleLike = async (userId, postId) => {
-  
+export const toggleLike = async (postId, updatedLikes) => {
+  const options = {
+    method: 'PUT',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ likes: updatedLikes }),
+  }
+
+  try {
+    const data = await fetch(`posts/${postId}`, options);
+    const res = await data.json();
+    return res;
+  }
+  catch(err) {
+    return err;
+  }
 };
 
 export const deletePost = async (postId) => {
@@ -58,7 +71,7 @@ export const deletePost = async (postId) => {
 
   try {
     const data = await fetch(`/posts/${postId}`, options);
-    const res = data.json();
+    const res = await data.json();
     return res;
   }
   catch (err) {

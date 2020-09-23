@@ -6,7 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import DeleteIcon from '@material-ui/icons/Delete';
 import StyledCard from '../../style/StyledCard';
-import { editPost, deletePost } from '../../actions/postActions';
+import { editPost, toggleLike, deletePost } from '../../actions/postActions';
 import { useAlert } from 'react-alert';
 
 // import PostCardSkeleton from '../skeletons/PostCardSkeleton';
@@ -22,32 +22,49 @@ export default function PostCardContainer({ postId, author, date, content, user,
   const [editPostContent, setEditPostContent] = useState(content);
   const [userId, setUserId] = useState(null);
   const [likeIndex, setLikeIndex] = useState(null);
+  const [userLikedPost, setUserLikedPost] = useState(false);
   const alert = useAlert();
 
   useEffect(() => {
     // Check if user is logged in
     const id = sessionStorage.getItem('id');
+    console.log('id: ', id);
 
     // Check if user has already liked this post
     if (id) {
-      const index = likes.findIndex(id => id === userId);
-      setUserId(id);
-      if (index) {
-        setLikeIndex(index);
+      const index = likes.findIndex(likeId => likeId === id);
+      console.log('index: ', index);
+
+      if (likes[index] === id) {
+        console.log('likes[likeIndex]: ', likes[index])
+        setUserLikedPost(true);
       }
     }
   }, [likes]);
 
   // Like post
   const handleLikeButton = () => {
+    console.log('like index: ', likeIndex)
+
     let updatedLikes;
 
-    if (likeIndex) {
-      updatedLikes = likes.splice(likeIndex, 1);
+    if (userLikedPost) {
+      likes.splice(likeIndex, 1);
+      updatedLikes = likes;
+      console.log('updated likes if userLikedPost is true: ', updatedLikes)
     } else {
-      updatedLikes = [...likes.push(userId)];
+      likes.push(userId);
+      updatedLikes = likes;
+      setUserLikedPost(true);
+      console.log('updated likes if userLikedPost is false: ', updatedLikes)
     }
 
+    toggleLike(postId, updatedLikes)
+     .then(res => {
+       console.log(res)
+       console.log('updated likes after req: ', updatedLikes)
+      })
+     .catch(err => console.log(err));
     
   };
 
@@ -121,7 +138,7 @@ export default function PostCardContainer({ postId, author, date, content, user,
             {/* Like / Share buttons */}
             <CardActions disableSpacing>
               <IconButton aria-label="like" title="Like" onClick={handleLikeButton}>
-                <FavoriteIcon style={{ color: likeIndex ? 'red' : 'default' }} />
+                <FavoriteIcon style={{ color: userLikedPost ? 'red' : 'black' }} />
               </IconButton>
               <IconButton aria-label="share" title="Share">
                 <ShareIcon />
