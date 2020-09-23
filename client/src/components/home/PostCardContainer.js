@@ -28,15 +28,13 @@ export default function PostCardContainer({ postId, author, date, content, user,
   useEffect(() => {
     // Check if user is logged in
     const id = sessionStorage.getItem('id');
-    console.log('id: ', id);
 
     // Check if user has already liked this post
     if (id) {
       const index = likes.findIndex(likeId => likeId === id);
-      console.log('index: ', index);
 
+      // If so, setUserLikedPost to true and save the index
       if (likes[index] === id) {
-        console.log('likes[likeIndex]: ', likes[index])
         setUserLikedPost(true);
         setLikeIndex(index);
       }
@@ -46,29 +44,24 @@ export default function PostCardContainer({ postId, author, date, content, user,
 
   // Like post
   const handleLikeButton = () => {
-    console.log('like index: ', likeIndex)
-
     let updatedLikes;
 
+    // If the user already liked this post, remove his id from the likes array
     if (userLikedPost) {
       likes.splice(likeIndex, 1);
       updatedLikes = likes;
       setUserLikedPost(false);
-      console.log('updated likes if userLikedPost is true: ', updatedLikes)
+
+    // Otherwise, add his id to the likes array
     } else {
       likes.push(userId);
       updatedLikes = likes;
       setUserLikedPost(true);
-      console.log('updated likes if userLikedPost is false: ', updatedLikes)
     }
 
+    // Update the likes array of this post
     toggleLike(postId, updatedLikes)
-     .then(res => {
-       console.log(res)
-       console.log('updated likes after req: ', updatedLikes)
-      })
      .catch(err => console.log(err));
-    
   };
 
   // Edit post
