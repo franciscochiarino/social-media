@@ -141,7 +141,7 @@ export default function PostCardContainer({ postId, author, date, content, user,
             {/* Like / Share buttons */}
             <CardActions disableSpacing>
               <IconButton aria-label="like" title="Like" onClick={handleLikeButton}>
-                <FavoriteIcon style={{ color: userLikedPost ? 'red' : 'black' }} />
+                <FavoriteIcon style={{ color: userLikedPost ? 'red' : 'lightgray' }} />
               </IconButton>
               <IconButton aria-label="share" title="Share">
                 <ShareIcon />
